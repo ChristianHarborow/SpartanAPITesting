@@ -1,0 +1,18 @@
+{
+  "id": 62,
+  "firstName": "Hollie",
+  "lastName": "Sunday",
+  "university": "University of Manchester",
+  "degree": "Computer Science",
+  "course": {
+    "id": 11,
+    "name": "TECH 901",
+    "streamId": 1,
+    "trainer": "Phil Windridge",
+    "startDate": "2023-03-01T00:00:00",
+    "endDate": "2023-05-01T00:00:00",
+    "spartans": []
+  },
+  "courseId": 11,
+  "graduated": true
+}

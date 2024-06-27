@@ -1,0 +1,9 @@
+{
+  "id": 61,
+  "firstName": "Jurgen",
+  "lastName": "Jurgenson",
+  "university": "University of Liverpool",
+  "degree": "Computer Science",
+  "courseId": 1,
+  "graduated": true
+}

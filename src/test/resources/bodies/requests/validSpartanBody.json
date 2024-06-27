@@ -1,0 +1,23 @@
+{
+  "id": 60,
+  "firstName": "Johnny",
+  "lastName": "Smithson",
+  "university": "University of Manchester",
+  "degree": "Computer Science",
+  "course": {
+    "id": 10,
+    "name": "TECH 900",
+    "stream": {
+      "id": 10,
+      "name": "C# Dev",
+      "courses": []
+    },
+    "streamId": 1,
+    "trainer": "Phil Windridge",
+    "startDate": "2023-03-01T00:00:00",
+    "endDate": "2023-05-01T00:00:00",
+    "spartans": []
+  },
+  "courseId": 10,
+  "graduated": true
+}
