@@ -1,6 +1,8 @@
 package testFramework.schemas;
 
 import java.util.List;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SpartanDTO{
@@ -66,5 +68,26 @@ public class SpartanDTO{
 
 	public int getId(){
 		return id;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		SpartanDTO that = (SpartanDTO) o;
+		return graduated == that.graduated
+				&& id == that.id
+				&& Objects.equals(firstName, that.firstName)
+				&& Objects.equals(lastName, that.lastName)
+				&& Objects.equals(stream, that.stream)
+				&& Objects.equals(university, that.university)
+				&& Objects.equals(degree, that.degree)
+				&& Objects.equals(course, that.course)
+				&& Objects.equals(links, that.links);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstName, lastName, stream, university, graduated, degree, course, links, id);
 	}
 }
