@@ -1,0 +1,32 @@
+{
+  "id": 11,
+  "firstName": "Taylor",
+  "lastName": "Swift",
+  "university": "University of Pennsylvania",
+  "degree": "Folklore",
+  "course": "TECH 302",
+  "stream": "C# Test",
+  "graduated": false,
+  "links": [
+    {
+      "href": "/api/Spartans/11",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "/api/Spartans/11",
+      "rel": "update_spartan",
+      "method": "PUT"
+    },
+    {
+      "href": "/api/Spartans/11",
+      "rel": "delete_spartan",
+      "method": "DELETE"
+    },
+    {
+      "href": "/api/Courses/3",
+      "rel": "course",
+      "method": "GET"
+    }
+  ]
+}
