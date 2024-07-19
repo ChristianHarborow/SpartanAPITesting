@@ -3,7 +3,6 @@ package testFramework.stepDefs;
 import org.json.simple.JSONObject;
 import testFramework.TestConfig;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,11 +24,6 @@ public class SpartanStepDefs {
     private Map<String, String> headers;
     private Response response;
     private String body;
-
-    @BeforeAll
-    public static void beforeAll() {
-        TestConfig.retrieveAuthTokenIfDead();
-    }
 
     @Before
     public void before() {

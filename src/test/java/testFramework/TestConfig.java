@@ -12,6 +12,7 @@ import java.util.Properties;
 
 public class TestConfig {
     private static final Properties properties = new Properties();
+    private static LocalDateTime tokenRetrieved;
 
     // Read from the config.properties file and store in the properties field
     static {
@@ -20,6 +21,7 @@ public class TestConfig {
                 .getResourceAsStream("config.properties")) {
             if (inputStream != null) {
                 properties.load(inputStream);
+                tokenRetrieved = LocalDateTime.parse(properties.getProperty("token_retrieved"));
             } else {
                 throw new IOException("Unable to find config.properties");
             }
@@ -41,19 +43,18 @@ public class TestConfig {
     }
 
     public static String getToken() {
-        return properties.getProperty("token");
-    }
-
-    public static void retrieveAuthTokenIfDead() {
-        if (!isTokenAlive()) {
-            properties.setProperty("token", getNewAuthToken());
-            properties.setProperty("token_retrieved", LocalDateTime.now().toString());
-            storeProperties();
+        synchronized (TestConfig.class) {
+            if (!isTokenAlive()) {
+                properties.setProperty("token", getNewAuthToken());
+                tokenRetrieved = LocalDateTime.now();
+                properties.setProperty("token_retrieved", tokenRetrieved.toString());
+                storeProperties();
+            }
+            return properties.getProperty("token");
         }
     }
 
     private static boolean isTokenAlive() {
-        LocalDateTime tokenRetrieved = LocalDateTime.parse(properties.getProperty("token_retrieved"));
         return tokenRetrieved.plusMinutes(25).isAfter(LocalDateTime.now());
     }
 
@@ -64,15 +65,11 @@ public class TestConfig {
     }
 
     private static void storeProperties() {
-        String path = TestConfig.class.getClassLoader().getResource("config.properties").getPath();
         try {
+            String path = TestConfig.class.getClassLoader().getResource("config.properties").getPath();
             properties.store(new FileWriter(path), null);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        retrieveAuthTokenIfDead();
     }
 }
