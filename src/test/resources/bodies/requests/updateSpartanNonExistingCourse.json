@@ -1,0 +1,23 @@
+{
+  "id": 11,
+  "firstName": "Zagreus",
+  "lastName": "Hadeson",
+  "university": "University of Athens",
+  "degree": "Computer Science",
+  "course": {
+    "id": 99,
+    "name": "TECH 900",
+    "stream": {
+      "id": 1,
+      "name": "C# Dev",
+      "courses": []
+    },
+    "streamId": 1,
+    "trainer": "Phil Windridge",
+    "startDate": "2023-03-01T00:00:00",
+    "endDate": "2023-05-01T00:00:00",
+    "spartans": []
+  },
+  "courseId": 99,
+  "graduated": true
+}

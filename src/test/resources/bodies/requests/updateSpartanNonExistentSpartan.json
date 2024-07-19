@@ -1,0 +1,23 @@
+{
+  "id": 99,
+  "firstName": "Jonathan",
+  "lastName": "Ferguson",
+  "university": "University of Leeds",
+  "degree": "Computer Science",
+  "course": {
+    "id": 1,
+    "name": "TECH 300",
+    "stream": {
+      "id": 1,
+      "name": "C# Dev",
+      "courses": []
+    },
+    "streamId": 1,
+    "trainer": "Phil Windridge",
+    "startDate": "2023-03-01T00:00:00",
+    "endDate": "2023-05-01T00:00:00",
+    "spartans": []
+  },
+  "courseId": 1,
+  "graduated": true
+}

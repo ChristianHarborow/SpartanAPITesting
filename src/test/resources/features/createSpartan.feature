@@ -6,6 +6,11 @@ Feature: As a user I need to be able to add new spartans
     Then a 200 status code is given
     And a SpartanDTO object is returned matching the request body
 
+  Scenario: Create spartan with unauthorised request
+    Given the request is unauthorised
+    When the post spartan request is made using "validSpartanBody.json"
+    Then a 401 status code is given
+
   Scenario: Create spartan using existing course
     Given the request is authorised
     When the post spartan request is made using "spartanWithExistingCourse.json"
