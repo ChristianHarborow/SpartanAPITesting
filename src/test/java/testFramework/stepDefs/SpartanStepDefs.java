@@ -1,72 +1,54 @@
 package testFramework.stepDefs;
 
 import org.json.simple.JSONObject;
-import testFramework.TestConfig;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import testFramework.schemas.Spartan;
 import testFramework.schemas.SpartanDTO;
 import testFramework.utils.SpartanUtils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 public class SpartanStepDefs {
     private static final String JSON_TEST_DATA_PATH = "src/test/resources/bodies/requests/";
-    private Map<String, String> headers;
-    private Response response;
     private String body;
+    StepDefContext context;
+
+    public SpartanStepDefs(StepDefContext context) {
+        this.context = context;
+    }
 
     @Before
     public void before() {
-        headers = new HashMap<>();
-    }
-
-    @Given("the request is authorised")
-    public void theRequestIsAuthorised() {
-        headers.put("Authorization", "Bearer " + TestConfig.getToken());
+//        headers = new HashMap<>();
     }
 
     @When("the get spartans request is made")
     public void theGetSpartansRequestIsMade() {
-        response = SpartanUtils.getAllSpartans(headers);
-    }
-
-    @Then("a {int} status code is given")
-    public void aStatusCodeIsGiven(int statusCode) {
-        assertThat(response.statusCode(), is(statusCode));
+        context.response = SpartanUtils.getAllSpartans(context.headers);
     }
 
     @And("a list of spartan objects is returned")
     public void aListOfSpartanObjectsIsReturned() {
-        SpartanDTO[] spartans = response.as(SpartanDTO[].class);
+        SpartanDTO[] spartans = context.response.as(SpartanDTO[].class);
         assertThat(spartans.length, greaterThan(0));
-    }
-
-    @Given("the request is unauthorised")
-    public void theRequestIsUnauthorised() {
-        // bearer token has not been added to headers
     }
 
     @When("the post spartan request is made using {string}")
     public void thePostSpartanRequestIsMadeUsing(String fileName) {
         String path = JSON_TEST_DATA_PATH + fileName;
         body = SpartanUtils.getJsonFromFile(path);
-        response = SpartanUtils.createSpartan(headers, body);
+        context.response = SpartanUtils.createSpartan(context.headers, body);
     }
 
     @And("a SpartanDTO object is returned matching the request body")
     public void aSpartanDTOObjectIsReturnedMatchingTheRequestBody() {
         var requestSpartan = SpartanUtils.getSchemaFromJson(body, Spartan.class);
-        var responseSpartan = response.as(SpartanDTO.class);
+        var responseSpartan = context.response.as(SpartanDTO.class);
         assertThat(requestSpartan.getId(), is(responseSpartan.getId()));
         assertThat(requestSpartan.getFirstName(), is(responseSpartan.getFirstName()));
         assertThat(requestSpartan.getLastName(), is(responseSpartan.getLastName()));
@@ -79,7 +61,7 @@ public class SpartanStepDefs {
 
     @And("a message is returned describing the missing fields")
     public void aMessageIsReturnedDescribingTheMissingFields() {
-        var errors = new JSONObject(response.jsonPath().getJsonObject("errors"));
+        var errors = new JSONObject(context.response.jsonPath().getJsonObject("errors"));
         var courseErrors = errors.get("Course");
         var lastnameErrors = errors.get("LastName");
         var firstnameErrors = errors.get("FirstName");
@@ -91,7 +73,7 @@ public class SpartanStepDefs {
 
     @And("a message is returned describing the missing body")
     public void aMessageIsReturnedDescribingTheMissingBody() {
-        var errors = new JSONObject(response.jsonPath().getJsonObject("errors"));
+        var errors = new JSONObject(context.response.jsonPath().getJsonObject("errors"));
         var emptyErrors = errors.get("");
         var spartanErrors = errors.get("spartan");
 
@@ -101,7 +83,7 @@ public class SpartanStepDefs {
 
     @When("the get spartan request is made to id {string}")
     public void theGetSpartanRequestIsMadeToId(String id) {
-        response = SpartanUtils.getSpartan(headers, id);
+        context.response = SpartanUtils.getSpartan(context.headers, id);
     }
 
     @And("a SpartanDTO object is returned matching {string}")
@@ -109,7 +91,7 @@ public class SpartanStepDefs {
         String path = JSON_TEST_DATA_PATH + fileName;
         String body = SpartanUtils.getJsonFromFile(path);
         var existingSpartan = SpartanUtils.getSchemaFromJson(body, SpartanDTO.class);
-        var responseSpartan = response.as(SpartanDTO.class);
+        var responseSpartan = context.response.as(SpartanDTO.class);
         assertThat(responseSpartan, equalTo(existingSpartan));
     }
 
@@ -117,12 +99,12 @@ public class SpartanStepDefs {
     public void thePutSpartanRequestIsMadeToSpartanIdUsing(String id, String fileName) {
         String path = JSON_TEST_DATA_PATH + fileName;
         body = SpartanUtils.getJsonFromFile(path);
-        response = SpartanUtils.updateSpartan(headers, id, body);
+        context.response = SpartanUtils.updateSpartan(context.headers, id, body);
     }
 
     @And("a message is returned describing the invalid id {string}")
     public void aMessageIsReturnedDescribingTheInvalidId(String id) {
-        var errors = new JSONObject(response.jsonPath().getJsonObject("errors"));
+        var errors = new JSONObject(context.response.jsonPath().getJsonObject("errors"));
         var idErrors = errors.get("id");
         assertThat(idErrors, is(List.of("The value '" + id + "' is not valid.")));
     }
@@ -132,8 +114,8 @@ public class SpartanStepDefs {
         String path = JSON_TEST_DATA_PATH + fileName;
         String body = SpartanUtils.getJsonFromFile(path);
         var originalSpartan = SpartanUtils.getSchemaFromJson(body, SpartanDTO.class);
-        response = SpartanUtils.getSpartan(headers, id);
-        var currentSpartan = response.as(SpartanDTO.class);
+        context.response = SpartanUtils.getSpartan(context.headers, id);
+        var currentSpartan = context.response.as(SpartanDTO.class);
         assertThat(currentSpartan, equalTo(originalSpartan));
     }
 }
