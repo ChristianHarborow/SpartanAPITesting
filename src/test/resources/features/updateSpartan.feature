@@ -1,3 +1,5 @@
+@Spartan
+@Put
 Feature: As a user I need to be able to update existing spartans
 
   Scenario: Update spartan request made with full valid body

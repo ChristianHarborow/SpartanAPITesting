@@ -1,3 +1,5 @@
+@Spartan
+@Post
 Feature: As a user I need to be able to add new spartans
 
   Scenario: Create spartan using full valid body

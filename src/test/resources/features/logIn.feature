@@ -1,3 +1,5 @@
+@Login
+@Post
 Feature: As a user, I need to be able to log in
   Scenario: The user logs in using valid credentials
     Given the credentials used are valid

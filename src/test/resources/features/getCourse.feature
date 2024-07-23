@@ -1,3 +1,5 @@
+@Course
+@Get
 Feature: As a user, I need to be able to get a specific course
 
   Scenario: The user makes a get course request to an existing id
