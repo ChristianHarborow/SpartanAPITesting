@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "name": "TECH 300",
+  "stream": "C# Dev",
+  "trainer": "Phil Windridge",
+  "spartans": [
+    "Sparty McFly",
+    "George Harrison",
+    "Beyonce Knowles",
+    "Dua Lipa",
+    "Ada Lovelace",
+    "Rosalind Franklin",
+    "Wonder Woman"
+  ],
+  "startDate": "2023-03-01T00:00:00",
+  "endDate": "2023-05-01T00:00:00",
+  "links": [
+    {
+      "href": "/api/Courses/1",
+      "rel": "self",
+      "method": "GET"
+    }
+  ]
+}

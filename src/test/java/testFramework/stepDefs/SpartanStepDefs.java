@@ -1,12 +1,12 @@
 package testFramework.stepDefs;
 
 import org.json.simple.JSONObject;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import testFramework.schemas.Spartan;
 import testFramework.schemas.SpartanDTO;
 import testFramework.utils.SpartanUtils;
+import testFramework.utils.TestUtils;
 
 import java.util.List;
 
@@ -14,17 +14,12 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 public class SpartanStepDefs {
-    private static final String JSON_TEST_DATA_PATH = "src/test/resources/bodies/requests/";
+    private static final String TEST_DATA_PATH = "src/test/resources/bodies/spartan/";
     private String body;
     StepDefContext context;
 
     public SpartanStepDefs(StepDefContext context) {
         this.context = context;
-    }
-
-    @Before
-    public void before() {
-//        headers = new HashMap<>();
     }
 
     @When("the get spartans request is made")
@@ -40,14 +35,14 @@ public class SpartanStepDefs {
 
     @When("the post spartan request is made using {string}")
     public void thePostSpartanRequestIsMadeUsing(String fileName) {
-        String path = JSON_TEST_DATA_PATH + fileName;
-        body = SpartanUtils.getJsonFromFile(path);
+        String path = TEST_DATA_PATH + fileName;
+        body = TestUtils.getJsonFromFile(path);
         context.response = SpartanUtils.createSpartan(context.headers, body);
     }
 
     @And("a SpartanDTO object is returned matching the request body")
     public void aSpartanDTOObjectIsReturnedMatchingTheRequestBody() {
-        var requestSpartan = SpartanUtils.getSchemaFromJson(body, Spartan.class);
+        var requestSpartan = TestUtils.getSchemaFromJson(body, Spartan.class);
         var responseSpartan = context.response.as(SpartanDTO.class);
         assertThat(requestSpartan.getId(), is(responseSpartan.getId()));
         assertThat(requestSpartan.getFirstName(), is(responseSpartan.getFirstName()));
@@ -88,32 +83,25 @@ public class SpartanStepDefs {
 
     @And("a SpartanDTO object is returned matching {string}")
     public void aSpartanDTOObjectIsReturnedMatchingTheExistingSpartan(String fileName) {
-        String path = JSON_TEST_DATA_PATH + fileName;
-        String body = SpartanUtils.getJsonFromFile(path);
-        var existingSpartan = SpartanUtils.getSchemaFromJson(body, SpartanDTO.class);
+        String path = TEST_DATA_PATH + fileName;
+        String body = TestUtils.getJsonFromFile(path);
+        var existingSpartan = TestUtils.getSchemaFromJson(body, SpartanDTO.class);
         var responseSpartan = context.response.as(SpartanDTO.class);
         assertThat(responseSpartan, equalTo(existingSpartan));
     }
 
     @When("the put spartan request is made to spartan id {string} using {string}")
     public void thePutSpartanRequestIsMadeToSpartanIdUsing(String id, String fileName) {
-        String path = JSON_TEST_DATA_PATH + fileName;
-        body = SpartanUtils.getJsonFromFile(path);
+        String path = TEST_DATA_PATH + fileName;
+        body = TestUtils.getJsonFromFile(path);
         context.response = SpartanUtils.updateSpartan(context.headers, id, body);
-    }
-
-    @And("a message is returned describing the invalid id {string}")
-    public void aMessageIsReturnedDescribingTheInvalidId(String id) {
-        var errors = new JSONObject(context.response.jsonPath().getJsonObject("errors"));
-        var idErrors = errors.get("id");
-        assertThat(idErrors, is(List.of("The value '" + id + "' is not valid.")));
     }
 
     @And("spartan with id {string} remains unchanged and matches {string}")
     public void spartanWithIdRemainsUnchangedAndMatches(String id, String fileName) {
-        String path = JSON_TEST_DATA_PATH + fileName;
-        String body = SpartanUtils.getJsonFromFile(path);
-        var originalSpartan = SpartanUtils.getSchemaFromJson(body, SpartanDTO.class);
+        String path = TEST_DATA_PATH + fileName;
+        String body = TestUtils.getJsonFromFile(path);
+        var originalSpartan = TestUtils.getSchemaFromJson(body, SpartanDTO.class);
         context.response = SpartanUtils.getSpartan(context.headers, id);
         var currentSpartan = context.response.as(SpartanDTO.class);
         assertThat(currentSpartan, equalTo(originalSpartan));
