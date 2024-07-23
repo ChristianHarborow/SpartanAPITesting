@@ -1,3 +1,5 @@
+@Course
+@Get
 Feature: As a user, I need to be able to get a list of all courses
 
   Scenario: The user makes an authorised get courses request

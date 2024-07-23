@@ -1,3 +1,5 @@
+@Spartan
+@Get
 Feature: As a user, I need to be able to get a list of all spartans
 
   Scenario: The user makes an authorised get spartans request

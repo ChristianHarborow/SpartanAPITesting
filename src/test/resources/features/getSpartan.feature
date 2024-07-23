@@ -1,3 +1,5 @@
+@Spartan
+@Get
 Feature: As a user, I need to be able to get a specific spartan
 
   Scenario: The user makes a get spartan request to an existing id
