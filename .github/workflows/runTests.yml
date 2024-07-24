@@ -38,6 +38,9 @@ jobs:
           ${{ secrets.base_uri }}
           'ToBeRetrieved'
           '2024-06-25T00:00:00'
+
+    - name: View properties file
+      run: cat ./src/test/resources/config.properties
     
     - name: Build and test with Maven
       run: mvn -B package --file pom.xml
