@@ -44,14 +44,7 @@ public class SpartanStepDefs {
     public void aSpartanDTOObjectIsReturnedMatchingTheRequestBody() {
         var requestSpartan = TestUtils.getSchemaFromJson(body, Spartan.class);
         var responseSpartan = context.response.as(SpartanDTO.class);
-        assertThat(requestSpartan.getId(), is(responseSpartan.getId()));
-        assertThat(requestSpartan.getFirstName(), is(responseSpartan.getFirstName()));
-        assertThat(requestSpartan.getLastName(), is(responseSpartan.getLastName()));
-        assertThat(requestSpartan.getUniversity(), is(responseSpartan.getUniversity()));
-        assertThat(requestSpartan.getDegree(), is(responseSpartan.getDegree()));
-        assertThat(requestSpartan.getCourse().getName(), is(responseSpartan.getCourse()));
-        assertThat(requestSpartan.getCourse().getStream().getName(), is(responseSpartan.getStream()));
-        assertThat(requestSpartan.isGraduated(), is(responseSpartan.isGraduated()));
+        assertThat(requestSpartan.equalsDTO(responseSpartan), is(true));
     }
 
     @And("a message is returned describing the missing fields")

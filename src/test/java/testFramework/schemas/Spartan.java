@@ -2,6 +2,8 @@ package testFramework.schemas;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Spartan{
 
 	@JsonProperty("firstName")
@@ -58,5 +60,15 @@ public class Spartan{
 
 	public int getCourseId(){
 		return courseId;
+	}
+
+	public boolean equalsDTO(SpartanDTO dto) {
+		return Objects.equals(firstName, dto.getFirstName())
+				&& Objects.equals(lastName, dto.getLastName())
+				&& Objects.equals(university, dto.getUniversity())
+				&& Objects.equals(graduated, dto.isGraduated())
+				&& Objects.equals(id, dto.getId())
+				&& Objects.equals(courseId, dto.getCourseId())
+				&& (course == null || course.getName().equals(dto.getCourse()));
 	}
 }
