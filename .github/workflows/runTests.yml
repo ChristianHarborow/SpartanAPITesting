@@ -21,23 +21,18 @@ jobs:
 
     - name: create properties file
       run: touch ./src/test/resources/config.properties
-    
-    - name: Write to properties file
-      uses: christian-draeger/write-properties@1.1.0
-      with:
-        path: './src/test/resources/config.properties'
-        property: |
-          'username'
-          'password'
-          'base_uri'
-          'token'
-          'token_retrieved'
-        value: |
-          '${{ secrets.username }}'
-          '${{ secrets.password }}'
-          '${{ secrets.base_uri }}'
-          'ToBeRetrieved'
-          '2024-06-25T00:00:00'
+
+    - name: write to properties file
+      env:
+        USERNAME: ${{ secrets.username }}
+        PASSWORD: ${{ secrets.password }}
+        BASE_URI: ${{ secrets.base_uri }}
+      run: |
+        echo "username=${USERNAME}" >> ./src/test/resources/config.properties
+        echo "password=${PASSWORD}" >> ./src/test/resources/config.properties
+        echo "base_uri=${BASE_URI}" >> ./src/test/resources/config.properties
+        echo "token=ToBeRetrieved" >> ./src/test/resources/config.properties
+        echo "token_retrieved=2024-04-25T13:00:00" >> ./src/test/resources/config.properties
 
     - name: View properties file
       run: cat ./src/test/resources/config.properties
