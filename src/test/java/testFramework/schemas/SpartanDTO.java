@@ -70,6 +70,16 @@ public class SpartanDTO{
 		return id;
 	}
 
+	public Integer getCourseId() {
+		for (LinksItem item : links) {
+			if (item.getRel().equals("course")) {
+				String[] split = item.getHref().split("/");
+				return Integer.parseInt(split[split.length - 1]);
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
