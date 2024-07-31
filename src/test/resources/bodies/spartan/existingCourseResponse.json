@@ -1,0 +1,32 @@
+{
+  "id": 61,
+  "firstName": "Jurgen",
+  "lastName": "Jurgenson",
+  "university": "University of Liverpool",
+  "degree": "Computer Science",
+  "course": "TECH 300",
+  "stream": "C# Dev",
+  "graduated": true,
+  "links": [
+    {
+      "href": "/api/Spartans/61",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "/api/Spartans/61",
+      "rel": "update_spartan",
+      "method": "PUT"
+    },
+    {
+      "href": "/api/Spartans/61",
+      "rel": "delete_spartan",
+      "method": "DELETE"
+    },
+    {
+      "href": "/api/Courses/1",
+      "rel": "course",
+      "method": "GET"
+    }
+  ]
+}

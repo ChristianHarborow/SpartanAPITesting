@@ -1,0 +1,32 @@
+{
+  "id": 60,
+  "firstName": "Johnny",
+  "lastName": "Smithson",
+  "university": "University of Manchester",
+  "degree": "Computer Science",
+  "course": "TECH 900",
+  "stream": "C# Dev",
+  "graduated": true,
+  "links": [
+    {
+      "href": "/api/Spartans/60",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "/api/Spartans/60",
+      "rel": "update_spartan",
+      "method": "PUT"
+    },
+    {
+      "href": "/api/Spartans/60",
+      "rel": "delete_spartan",
+      "method": "DELETE"
+    },
+    {
+      "href": "/api/Courses/10",
+      "rel": "course",
+      "method": "GET"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": 62,
+  "firstName": "Hollie",
+  "lastName": "Sunday",
+  "university": "University of Manchester",
+  "degree": "Computer Science",
+  "course": "TECH 901",
+  "stream": "C# Dev",
+  "graduated": true,
+  "links": [
+    {
+      "href": "/api/Spartans/62",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "/api/Spartans/62",
+      "rel": "update_spartan",
+      "method": "PUT"
+    },
+    {
+      "href": "/api/Spartans/62",
+      "rel": "delete_spartan",
+      "method": "DELETE"
+    },
+    {
+      "href": "/api/Courses/11",
+      "rel": "course",
+      "method": "GET"
+    }
+  ]
+}
