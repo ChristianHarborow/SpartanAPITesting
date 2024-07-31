@@ -6,7 +6,7 @@ Feature: As a user I need to be able to add new spartans
     Given the request is authorised
     When the post spartan request is made using "validSpartanBody.json"
     Then a 200 status code is given
-    And a SpartanDTO object is returned matching the request body
+    And a SpartanDTO object is returned matching "validSpartanResponse.json"
 
   Scenario: Create spartan with unauthorised request
     Given the request is unauthorised
@@ -17,13 +17,13 @@ Feature: As a user I need to be able to add new spartans
     Given the request is authorised
     When the post spartan request is made using "spartanWithExistingCourse.json"
     Then a 200 status code is given
-    And a SpartanDTO object is returned matching the request body
+    And a SpartanDTO object is returned matching "existingCourseResponse.json"
 
   Scenario: Create spartan using existing stream
     Given the request is authorised
     When the post spartan request is made using "spartanWithExistingStream.json"
     Then a 200 status code is given
-    And a SpartanDTO object is returned matching the request body
+    And a SpartanDTO object is returned matching "existingStreamResponse.json"
 
   Scenario: Create spartan using empty json object
     Given the request is authorised

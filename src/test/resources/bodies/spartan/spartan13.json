@@ -1,0 +1,32 @@
+{
+  "id": 13,
+  "firstName": "Dua",
+  "lastName": "Lipa",
+  "university": "Sylvia Young Theatre School",
+  "degree": "New Rules",
+  "course": "TECH 300",
+  "stream": "C# Dev",
+  "graduated": false,
+  "links": [
+    {
+      "href": "/api/Spartans/13",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "/api/Spartans/13",
+      "rel": "update_spartan",
+      "method": "PUT"
+    },
+    {
+      "href": "/api/Spartans/13",
+      "rel": "delete_spartan",
+      "method": "DELETE"
+    },
+    {
+      "href": "/api/Courses/1",
+      "rel": "course",
+      "method": "GET"
+    }
+  ]
+}
